@@ -1,0 +1,33 @@
+int_var = 10                # ціле число
+str_var = "Привіт"          # рядок
+list_var = [1, 2, 3]        # список
+bool_var = True             # логічне значення
+
+print("Тип int_var:", type(int_var)) #Вказування типу змінної
+print("Тип str_var:", type(str_var))
+print("Тип list_var:", type(list_var))
+print("Тип bool_var:", type(bool_var))
+
+#Умовна конструкція if-else
+num = int(input("Введіть ціле число: "))
+if num > 0:
+    print("Додатнє число")
+elif num == 0:
+    print("Число дорівнює нулю")
+else:
+    print("Від'ємне число")
+
+Цикл for(таблиця множення)
+table_num = int(input("Введіть число для таблиці множення: "))
+print("Таблиця множення для", table_num)
+for i in range(1, 11):
+    print(table_num, "x", i, "=", table_num * i)
+
+Цикл while з break (сума чисел)
+total = 0
+while True:
+    val = int(input("Введіть число (для завершення введіть 0): "))
+    total += val
+    if val == 0:
+        break
+print("Сума введених чисел:", total)
