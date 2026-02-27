@@ -1,0 +1,67 @@
+#include <iostream>
+#include <vector>
+#include <ctime>
+#include <iomanip> 
+
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Ukrainian");
+    int nums[5][5];
+    srand(time(0)); 
+for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            nums[i][j] = rand() % 49 + 1; 
+            cout << nums[i][j] << "\t";
+        }
+        cout << endl;
+    }
+   cout << "\nОбхiд по рядкам:" << endl;
+    vector<int> nums2; 
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            nums2.push_back(nums[i][j]); 
+        }
+    }
+    cout << "List: ";
+    for (int x : nums2) cout << x << ",";
+
+    nums2.clear(); 
+    cout << "\n\nОбхiд по стовпцях:" << endl;
+    for (int j = 0; j < 5; j++) {
+        for (int i = 0; i < 5; i++) {
+            nums2.push_back(nums[i][j]);
+        }
+    }
+
+    cout << "List2: ";
+    for (int x : nums2) cout << x << ",";
+
+    nums2.clear();
+    cout << "\n\nСпiральний обхiд:" << endl;
+    int top = 0, bottom = 4, left = 0, right = 4;
+
+    while (top <= bottom && left <= right) {
+        for (int j = left; j <= right; j++) nums2.push_back(nums[top][j]);
+        top++;
+
+        for (int i = top; i <= bottom; i++) nums2.push_back(nums[i][right]);
+        right--;
+
+        if (top <= bottom) {
+            for (int j = right; j >= left; j--) nums2.push_back(nums[bottom][j]);
+            bottom--;
+        }
+
+       if (left <= right) {
+            for (int i = bottom; i >= top; i--) nums2.push_back(nums[i][left]);
+            left++;
+        }
+    }
+
+    cout << "List3: ";
+    for (int x : nums2) cout << x << ",";
+    cout << endl;
+
+    return 0;
+}
