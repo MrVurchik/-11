@@ -1,0 +1,69 @@
+#include <iostream>
+#include <ctime>   
+#include <cstdlib> 
+#include <chrono>  
+
+using namespace std;
+using namespace std::chrono;
+void BubblySort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+void InsertSort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+}
+
+int main() {
+    setlocale(LC_ALL, "Ukrainian");
+    srand(time(0));
+
+    int sizes[] = { 100, 1000, 10000 };
+
+    for (int n : sizes) {
+        cout << "--------- Час сортування для " << n << " елементів----------:" << endl;
+    int* original = new int[n];
+        for (int i = 0; i < n; i++) {
+            original[i] = rand() % 1000 + 1; 
+        }
+        int* listBubble = new int[n];
+        int* listInsert = new int[n];
+        for (int i = 0; i < n; i++) {
+            listBubble[i] = original[i];
+            listInsert[i] = original[i];
+        }
+        auto startB = high_resolution_clock::now();
+        BubblySort(listBubble, n);
+        auto stopB = high_resolution_clock::now();
+        auto durationB = duration_cast<microseconds>(stopB - startB);
+        cout << "Час сортування бульбашкою: " << (double)durationB.count() << " mcr" << endl;
+
+        auto startI = high_resolution_clock::now();
+        InsertSort(listInsert, n);
+        auto stopI = high_resolution_clock::now();
+        auto durationI = duration_cast<microseconds>(stopI - startI);
+        cout << "Час сортування вставкою:   " << (double)durationI.count() << " mcr" << endl;
+
+        delete[] original;
+        delete[] listBubble;
+        delete[] listInsert;
+
+        cout << endl;
+    }
+
+    return 0;
+}
